@@ -10,12 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160713225629) do
+ActiveRecord::Schema.define(version: 20160714000121) do
 
-  create_table "properties", force: :cascade do |t|
+  create_table "landlords", force: :cascade do |t|
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "properties", force: :cascade do |t|
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.string   "city"
+    t.integer  "landlord_id"
+    t.index ["landlord_id"], name: "index_properties_on_landlord_id"
+  end
+
+  create_table "repairs", force: :cascade do |t|
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "property_id"
+    t.index ["property_id"], name: "index_repairs_on_property_id"
   end
 
 end
